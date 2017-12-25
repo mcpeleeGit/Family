@@ -1,0 +1,48 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+@using Family.Account.Model;
+@{
+    ViewBag.Title = "AccountList";
+
+    var list = Model.Get<IList<AccountItem>>("List");
+}
+<div class="jumbotron">
+    <form action="/Dev/AccountList" method="post" id="search">
+        <input type="button" value="입출금항목등록" id="write" class="btn btn-primary btn-lg" />
+        <input type="button" value="입출금항목일괄등록" id="multiExcelWrite" class="btn btn-lg btn-default" />
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>내용</th>
+            <th>금액</th>
+            <th>처리일</th>
+            <th>입출금구분</th>
+            <th>유형</th>
+            <th>카드은행구분</th>
+            <th>상태</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in list)
+        {
+            <tr>
+                <td>@item.Contents </td>
+                <td>@item.Price </td>
+                <td>@item.ProcDate.ToShortDateString() </td>
+                <td>@item.InOutCode </td>
+                <td>@item.CaseCode </td>
+                <td>@item.CardBankCode </td>
+                <td>@item.State </td>
+                <td><input type="button" name="update" value="수정" data-id="@item.Id" class="btn btn-sm btn-warning" /></td>
+                <td><input type="button" name="delete" value="삭제" data-id="@item.Id" class="btn btn-sm btn-danger" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dev/accountList")
+}
+
+

@@ -1,0 +1,83 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+@using Family.CodeType.Model;
+@using Family.Code.Model;
+@{
+    ViewBag.Title = "CodeList";
+
+    var list = Model.Get<IList<CodeTypeItem>>("List");
+    var codelist = Model.Get<IList<CodeItem>>("CodeList");
+    IList<CodeItem> searchcodelist;
+}
+<div class="jumbotron">
+    <form action="/Dev/CodeTypeList" method="post" id="search">
+        <input type="button" value="코드타입등록" id="write" class="btn btn-primary btn-lg" />
+    </form>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>코드타입명</th>
+            <th>코드타입코드</th>
+            <th>등록일</th>
+            <th>상태</th>
+            <th>코드등록</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in list)
+        {
+            <tr>
+                <td>@item.CodeTypeName </td>
+                <td>@item.CodeType </td>
+                <td>@item.RegDate.ToShortDateString() </td>
+                <td>@item.State </td>
+                <td><input type="button" name="codewrite" value="코드등록" data-codetype="@item.CodeType" class="btn btn-sm btn-primary" /></td>
+                <td><input type="button" name="update" value="수정" data-codetype="@item.CodeType" class="btn btn-sm btn-warning" /></td>
+                <td><input type="button" name="delete" value="삭제" data-codetype="@item.CodeType" class="btn btn-sm btn-danger" /></td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    @{
+                        searchcodelist = codelist.Where(w => w.CodeType.Equals(item.CodeType)).ToList();
+                        if (searchcodelist.Count() > 0)
+                        {
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>코드명</th>
+                                        <th>코드</th>
+                                        <th>등록일</th>
+                                        <th>상태</th>
+                                        <th>수정</th>
+                                        <th>삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var codeitem in searchcodelist)
+                                    {
+                                        <tr>
+                                            <td>@codeitem.CodeName </td>
+                                            <td>@codeitem.Code </td>
+                                            <td>@codeitem.RegDate.ToShortDateString() </td>
+                                            <td>@codeitem.State </td>
+                                            <td><input type="button" name="codeupdate" value="수정" data-code="@codeitem.Code" class="btn btn-xs btn-warning" /></td>
+                                            <td><input type="button" name="codedelete" value="삭제" data-code="@codeitem.Code" class="btn btn-xs btn-danger" /></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </td>
+            </tr>
+                        }
+    </tbody>
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dev/codeList")
+}
+
+

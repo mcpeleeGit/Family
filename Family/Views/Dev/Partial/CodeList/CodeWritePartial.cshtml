@@ -1,0 +1,16 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+
+<form name="frmCodeWrite" id="frmCodeWrite" action="/Dev/CodeWrite" method="post">
+    <input type="hidden" name="CodeType" size="10" value="@Model.GetString("CodeType")" />
+    <table class="table table-striped">
+        <tr>
+            <th>코드명</th>
+            <td><input type="text" name="CodeName" size="10" value="" /></td>
+        </tr>
+        <tr>
+            <th>코드</th>
+            <td><input type="text" name="Code" size="10" value="" />  </td>
+        </tr>
+    </table>
+    <input type="button" value="등록" id="confirmCodeWrite" class="btn btn-primary btn-lg" />
+</form>

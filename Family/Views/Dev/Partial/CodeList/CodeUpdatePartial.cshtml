@@ -1,0 +1,23 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+@using Family.Code.Model;
+@{
+    var item = Model.Get<CodeItem>("item");
+}
+<form name="frmCodeUpdate" id="frmCodeUpdate" action="/Dev/CodeUpdate/" method="post">
+    <input type="hidden" name="CodeType" size="10" value="@item.CodeType" />
+    <table class="table table-striped">
+        <tr>
+            <th>코드명</th>
+            <td><input type="text" name="CodeName" size="10" value="@item.CodeName" /></td>
+        </tr>
+        <tr>
+            <th>코드코드</th>
+            <td><input type="text" name="Code" size="10" value="@item.Code" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <th>상태</th>
+            <td>@Html.DropDownList("State", Model.GetSelectList("state"))</td>
+        </tr>
+    </table>
+    <input type="button" value="수정" id="confirmCodeUpdate" class="btn btn-primary btn-lg" />
+</form>

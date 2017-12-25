@@ -1,0 +1,31 @@
+﻿@Scripts.Render("~/bundles/dev/accountView")
+<div ng-controller="mainCtrl">
+    <div class="jumbotron">
+        <select ng-model="year" ng-change="GetAccountView()">
+            <option ng-repeat="item in [] | range:startYear:endYear" ng-value="item">{{item}}</option>
+        </select>
+        <select ng-model="month" ng-change="GetAccountView()">
+            <option ng-repeat="item in [] | range:1:12" ng-value="item">{{item}}</option>
+        </select>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>기록구분</th>
+                <th>내용</th>
+                <th>목표금액</th>
+                <th>소비금액</th>
+                <th>수입금액</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in AccountView">
+                <td>{{item.CardBankCode}}</td>
+                <td>{{item.CodeName}}</td>
+                <td></td>
+                <td>{{item.InOutCode == "OUT" ? item.Price : 0 | number}}</td>
+                <td>{{item.InOutCode == "IN" ? item.Price : 0 | number}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+@using Family.Account.Model;
+@{
+    var item = Model.Get<AccountItem>("item");
+}
+<form name="frmUpdate" id="frmUpdate" action="/Dev/AccountUpdate/@item.Id" method="post">
+    <table class="table table-striped">
+        <tr>
+            <th>내용</th>
+            <td><input type="text" name="Contents" size="10" value="@item.Contents" /></td>
+        </tr>
+        <tr>
+            <th>금액</th>
+            <td><input type="text" name="Price" size="10" value="@item.Price"/></td>
+        </tr>
+        <tr>
+            <th>처리일</th>
+            <td><input type="text" name="ProcDate" size="10" value="@item.ProcDate" /></td>
+        </tr>
+        <tr>
+            <th>입출금구분</th>
+            <td>@Html.DropDownList("InOutCode", Model.GetSelectList("inOutCode"))</td>
+        </tr>
+        <tr>
+            <th>유형</th>
+            <td>@Html.DropDownList("CaseCode", Model.GetSelectList("caseCode"))</td>
+        </tr>
+        <tr>
+            <th>카드은행구분</th>
+            <td>@Html.DropDownList("CardBankCode", Model.GetSelectList("cardBankCode"))</td>
+        </tr>
+        <tr>
+            <th>상태</th>
+            <td>@Html.DropDownList("State", Model.GetSelectList("state"))</td>
+        </tr>
+    </table>
+    <input type="button" value="수정" id="confirmUpdate" class="btn btn-primary btn-lg" />
+</form>

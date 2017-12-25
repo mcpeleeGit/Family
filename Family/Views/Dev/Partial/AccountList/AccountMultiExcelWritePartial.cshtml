@@ -1,0 +1,13 @@
+﻿@model JangBoGo.Model.Param.Common.CommonParam
+
+<form name="frmWrite" id="frmWrite" action="/Dev/AccountMultiExcelWrite" method="post">
+    컬럼순서 : 금액, 처리일, 입출금구분코드, 유형코드, 카드은행구분
+    <table class="table table-striped">
+        <tr>
+            <th>엑셀데이터</th>
+            <td><textarea name="excelData" rows="5" cols="10"></textarea></td>
+        </tr>
+    </table>
+    <input type="button" value="등록" id="confirmWrite" class="btn btn-primary btn-lg" />
+    <a href="~/Content/excel/excelAccount.xlsx" class="btn btn-sm btn-info">엑셀양식다운로드</a>
+</form>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database"
+         xmlns:tx="http://www.springframework.net/tx">
+  
+<db:provider id="oleDbProvider"
+                 provider="System.Data.OleDb"
+                 connectionString=""/>
+
+  <object id="oleAdoTemplate" type="Spring.Data.Generic.AdoTemplate, Spring.Data">
+    <property name="DbProvider" ref="oleDbProvider"/>
+    <property name="DataReaderWrapperType" value="JangBoGo.Data.Support.YsrNullMappingDataReader, JangBoGo"/>
+    <property name="CommandTimeout" value="60" />
+  </object>
+
+  <object id="NameValueDao" type="Yusurun.Info.NameValue.Dao.NameValueDao, Yusurun.Common">
+    <property name="DbProvider" ref="oleDbProvider"/>
+    <property name="AdoTemplate" ref="oleAdoTemplate"></property>
+  </object>
+</objects>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:db="http://www.springframework.net/database"
+         xmlns:tx="http://www.springframework.net/tx">
+
+  <db:provider id="DbProvider" provider="System.Data.SqlClient" connectionString="SERVER=leedongha-PC\lee;DATABASE=Family;USER ID=sa; PASSWORD=ad!@#0"/>
+  <db:provider id="DbProvider_JangBoGo" provider="System.Data.SqlClient" connectionString="SERVER=leedongha-PC\lee;DATABASE=JangBoGo;USER ID=sa; PASSWORD=ad!@#0"/>
+
+  <object id="IISMailServiceHost" type="System.String">
+    <constructor-arg value="127.0.0.1"/>
+  </object>
+  <object id="AdoTemplate" type="Spring.Data.Generic.AdoTemplate, Spring.Data">
+    <property name="DbProvider" ref="DbProvider"/>
+    <property name="DataReaderWrapperType" value="JangBoGo.Data.Support.YsrNullMappingDataReader, JangBoGo"/>
+    <property name="CommandTimeout" value="60" />
+  </object>
+  
+  
+  
+  <object id="AdoTemplate_JangBoGo" type="Spring.Data.Generic.AdoTemplate, Spring.Data">
+    <property name="DbProvider" ref="DbProvider_JangBoGo"/>
+    <property name="DataReaderWrapperType" value="JangBoGo.Data.Support.YsrNullMappingDataReader, JangBoGo"/>
+    <property name="CommandTimeout" value="60" />
+  </object>  
+  
+  
+  
+  <object id="transactionManager" type="Spring.Data.Core.AdoPlatformTransactionManager, Spring.Data">
+    <property name="DbProvider" ref="DbProvider" />
+  </object>
+  
+  
+  <tx:attribute-driven />
+</objects>
